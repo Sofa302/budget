@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block register %}
+<div class="card auth-card">
+    <h2>📝 Реєстрація</h2>
+    <form method="POST">
+        <input type="text" name="login" placeholder="Логін" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <!-- <input type="number" name="age" placeholder="Вік" required hidden>
+        <input type="text" name="country" placeholder="Країна" required hidden>
+        <input type="number" step="0.01" name="salary" placeholder="Зарплата" required hidden> -->
+        <button type="submit">Створити акаунт</button>
+    </form>
+    <p>Вже є акаунт? <a href="/login">Увійти</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block c %}
+
+<h2>💸 Витрати</h2>
+
+<!-- Додати витрату -->
+<form method="POST" action="/add-expense" class="expense-form">
+    <input type="text" name="category" placeholder="Категорія" required>
+    <input type="number" name="amount" placeholder="Сума" required>
+    <button type="submit">➕ Додати</button>
+</form>
+
+<!-- Список витрат -->
+<div class="expenses">
+    {% if expenses %}
+        {% for e in expenses %}
+            <div class="expense-item">
+                <span class="expense-category">{{ e.category }}</span>
+                <span class="expense-amount">{{ e.amount }} грн</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Витрат поки немає</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+

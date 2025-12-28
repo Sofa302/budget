@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .card input, .card button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .card button {
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        ul { padding-left: 20px; }
+        li { margin: 5px 0; }
+        .green { color: green; }
+        .red { color: red; }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    {% if 'user' in session %}
+        <a href="/">🏠 Головна</a>
+        <a href="/stats">📊 Статистика</a>
+        <a href="/logout">🚪 Вийти</a>
+    {% else %}
+        <a href="/login">🔐 Вхід</a>
+        <a href="/register">📝 Реєстрація</a>
+    {% endif %}
+</nav>
+
+<div class="container">
+<main class="content">
+{% if 'user' in session and not stats %}
+<h1>💰 Облік бюджету</h1>
+
+<!-- 📉 ВИТРАТИ -->
+<div class="card">
+    <h2>📉 Витрати</h2>
+    <form method="POST">
+        <input type="hidden" name="type" value="expense">
+        <input type="text" name="category" placeholder="Категорія" required>
+        <input type="number" name="suma" placeholder="Сума" required>
+        <button type="submit">Додати витрату</button>
+    </form>
+    <ul>
+        {% for e in expenses %}
+            <li class="red">− {{ e.suma }} грн | {{ e.category }}</li>
+        {% endfor %}
+    </ul>
+    <p><b>Загальна сума витрат: {{ total }} грн</b></p>
+</div>
+
+<!-- 📈 ДОДАТКОВИЙ ДОХІД -->
+<div class="card">
+    <h2>📈 Додатковий дохід</h2>
+    <form method="POST" action="/add-additional-income">
+        <input type="text" name="category" placeholder="Категорія доходу" required>
+        <input type="number" name="suma" placeholder="Сума" required>
+        <button type="submit">Додати дохід</button>
+    </form>
+    <ul>
+        {% for i in additional_income %}
+            <li class="green">+ {{ i.suma }} грн | {{ i.category }}</li>
+        {% endfor %}
+    </ul>
+    <p>💼 Загальний додатковий дохід: <b>{{ total_additional_income }} грн</b></p>
+</div>
+
+{% elif stats %}
+<!-- 📊 СТАТИСТИКА -->
+<div class="card">
+    <h2>📊 Статистика місяця</h2>
+    <p>💰 Загальний дохід: <b>{{ mysterious_income }} грн</b></p>
+    <p>💸 Витрати: <b>{{ total_expenses }} грн</b></p>
+    <p>📈 Додатковий дохід: <b>{{ total_additional_income }} грн</b></p>
+    <p>💼 Залишок: <b>{{ remaining }} грн</b></p>
+
+    <h3>Витрати по категоріях:</h3>
+    <ul>
+        {% for cat, amount in categories_summary.items() %}
+            <li>{{ cat }}: {{ amount }} грн ({{ categories_percent[cat] }}%)</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% elif request.path == '/login' %}
+<!-- 🔐 Вхід -->
+<div class="card auth-card">
+    <h2>🔐 Вхід</h2>
+    <form method="POST" action="/login">
+        <input type="text" name="login" placeholder="Введіть логін" required>
+        <input type="password" name="password" placeholder="Введіть пароль" required>
+        <button type="submit">Увійти</button>
+    </form>
+    <p>Немає акаунту? <a href="/register">Зареєструватися</a></p>
+</div>
+
+{% elif request.path == '/register' %}
+<!-- 📝 Реєстрація -->
+<div class="card auth-card">
+    <h2>📝 Реєстрація</h2>
+    <form method="POST" action="/register">
+        <input type="text" name="login" placeholder="Введіть логін" required>
+        <input type="password" name="password" placeholder="Введіть пароль" required>
+        <button type="submit">Зареєструватися</button>
+    </form>
+    <p>Вже маєте акаунт? <a href="/login">Увійти</a></p>
+</div>
+
+{% endif %}
+</main>
+
+<!-- 👤 ПРОФІЛЬ -->
+{% if 'user' in session %}
+<aside class="side-panel">
+    <h3>👤 Профіль</h3>
+    <form method="POST" action="/update-profile">
+        <label>Логін</label>
+        <input type="text" value="{{ user.login }}" disabled>
+        <label>Країна</label>
+        <input type="text" name="country" value="{{ user.country }}">
+        <label>Середній дохід</label>
+        <input type="number" name="salary" value="{{ user.salary }}">
+        <button type="submit">💾 Зберегти</button>
+    </form>
+</aside>
+{% endif %}
+
+</div>
+</body>
+</html>

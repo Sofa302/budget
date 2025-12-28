@@ -1,0 +1,184 @@
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px;
+    margin-bottom: 20px;
+}
+
+.auth-card {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    transform: scale(1.1);
+}
+
+.warning {
+    font-weight: bold;
+}
+
+.expense-list li {
+    padding: 6px 0;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+.nav {
+    background: #222;
+    padding: 12px;
+}
+
+.nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+/* Контейнер */
+.container {
+    display: flex;
+}
+
+/* Контент */
+.content {
+    width: 75%;
+    padding: 20px;
+}
+
+/* Бокова панель справа */
+.side-panel {
+    width: 25%;
+    background: #ffffff;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
+    min-height: calc(100vh - 48px);
+}
+
+.side-panel h3 {
+    margin-top: 0;
+}
+
+.side-panel label {
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+}
+
+.side-panel input {
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+}
+
+.side-panel button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* витрати */
+
+.container {
+            display: flex;
+            min-height: calc(100vh - 48px);
+        }
+
+        /* Основний контент */
+        .content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        /* Бокова панель */
+        .side-panel {
+            width: 25%;
+            background: #fff;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        /* Витрати */
+        .expense-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .expense-form input {
+            padding: 8px;
+            flex: 1;
+        }
+
+        .expense-form button {
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #fff;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+        /* Профіль */
+        .side-panel input {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 10px;
+        }
+
+        .side-panel button {
+            width: 100%;
+            padding: 8px;
+            cursor: pointer;
+        }
